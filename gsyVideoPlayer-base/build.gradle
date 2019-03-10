@@ -35,4 +35,3 @@ dependencies {
 
 }
 
-apply from: './bintray.gradle'
