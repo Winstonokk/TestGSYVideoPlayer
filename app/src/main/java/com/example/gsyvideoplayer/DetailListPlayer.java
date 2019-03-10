@@ -2,12 +2,15 @@ package com.example.gsyvideoplayer;
 
 import android.os.Bundle;
 import androidx.core.widget.NestedScrollView;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.shuyu.gsyvideoplayer.GSYBaseActivityDetail;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
+import com.shuyu.gsyvideoplayer.listener.UrlEmptyListener;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.listener.LockClickListener;
 import com.shuyu.gsyvideoplayer.model.GSYVideoModel;
@@ -45,13 +48,19 @@ public class DetailListPlayer extends GSYBaseActivityDetail<ListGSYVideoPlayer> 
 
         //普通模式
         initVideo();
-
-        //String url = "http://baobab.wd jcdn.com/14564977406580.mp4";
+        //实例化所有子视频
         List<GSYVideoModel> urls = new ArrayList<>();
-        urls.add(new GSYVideoModel("http://wdquan-space.b0.upaiyun.com/VIDEO/2018/11/22/ae0645396048_hls_time10.m3u8", "标题1"));
-        urls.add(new GSYVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4", "标题2"));
-        urls.add(new GSYVideoModel("https://res.exexm.com/cw_145225549855002", "标题3"));
-        urls.add(new GSYVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4", "标题4"));
+//        urls.add(new GSYVideoModel("http://wdquan-space.b0.upaiyun.com/VIDEO/2018/11/22/ae0645396048_hls_time10.m3u8", "标题1"));
+//        urls.add(new GSYVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4", "标题2"));
+//        urls.add(new GSYVideoModel("https://res.exexm.com/cw_145225549855002", "标题3"));
+//        urls.add(new GSYVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4", "标题4"));
+
+        //初始化 传入假url
+        urls.add(new GSYVideoModel("lwd2018", "标题1"));
+        urls.add(new GSYVideoModel("lwd2018", "标题2"));
+        urls.add(new GSYVideoModel("lwd2018", "标题3"));
+        urls.add(new GSYVideoModel("lwd2018", "标题4"));
+
         detailPlayer.setUp(urls, true, 0);
 
         //增加封面
@@ -79,6 +88,20 @@ public class DetailListPlayer extends GSYBaseActivityDetail<ListGSYVideoPlayer> 
                     //配合下方的onConfigurationChanged
                     orientationUtils.setEnable(!lock);
                 }
+            }
+        });
+
+        detailPlayer.setUrlEmptyListener(new UrlEmptyListener() {
+            @Override
+            public void onUrlEmpty() {
+                Log.e("wang","收到url为假的回调");
+                List<GSYVideoModel> urls = new ArrayList<>();
+                urls.add(new GSYVideoModel("http://wdquan-space.b0.upaiyun.com/VIDEO/2018/11/22/ae0645396048_hls_time10.m3u8", "标题1"));
+                urls.add(new GSYVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4", "标题2"));
+                urls.add(new GSYVideoModel("https://res.exexm.com/cw_145225549855002", "标题3"));
+                urls.add(new GSYVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4", "标题4"));
+                detailPlayer.setUp(urls, true, 0);
+                detailPlayer.clickStartIcon();
             }
         });
 

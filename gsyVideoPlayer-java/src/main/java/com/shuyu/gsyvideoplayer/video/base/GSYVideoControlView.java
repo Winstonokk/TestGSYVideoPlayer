@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -818,6 +819,13 @@ public abstract class GSYVideoControlView extends GSYVideoView implements View.O
         if (TextUtils.isEmpty(mUrl)) {
             Debuger.printfError("********" + getResources().getString(R.string.no_url));
             //Toast.makeText(getActivityContext(), getResources().getString(R.string.no_url), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mUrl.equals("lwd2018")){
+            Log.e("wang","只有初始化的假url");
+            if(null!=urlEmptyListener){
+                urlEmptyListener.onUrlEmpty();
+            }
             return;
         }
         if (mCurrentState == CURRENT_STATE_NORMAL || mCurrentState == CURRENT_STATE_ERROR) {

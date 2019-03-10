@@ -215,4 +215,9 @@ public class ListGSYVideoPlayer extends StandardGSYVideoPlayer {
         }
         return false;
     }
+
+    @Override
+    public void clickStartIcon() {
+        super.clickStartIcon();
+    }
 }

@@ -21,6 +21,7 @@ import android.view.WindowManager;
 
 import com.shuyu.gsyvideoplayer.R;
 import com.shuyu.gsyvideoplayer.listener.GSYMediaPlayerListener;
+import com.shuyu.gsyvideoplayer.listener.UrlEmptyListener;
 import com.shuyu.gsyvideoplayer.listener.VideoAllCallBack;
 import com.shuyu.gsyvideoplayer.utils.CommonUtil;
 import com.shuyu.gsyvideoplayer.utils.Debuger;
@@ -154,6 +155,8 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
 
     //网络监听
     protected NetInfoModule mNetInfoModule;
+
+    protected UrlEmptyListener urlEmptyListener;
 
     public GSYVideoView(@NonNull Context context) {
         super(context);
@@ -1131,5 +1134,9 @@ public abstract class GSYVideoView extends GSYTextureRenderView implements GSYMe
      */
     public void setOverrideExtension(String overrideExtension) {
         this.mOverrideExtension = overrideExtension;
+    }
+
+    public void setUrlEmptyListener(UrlEmptyListener urlEmptyListener) {
+        this.urlEmptyListener = urlEmptyListener;
     }
 }
